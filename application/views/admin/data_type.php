@@ -1,7 +1,7 @@
 <div class="main-content">
 	<div class="section">
 		<div class="section-header">
-			<h1> Data Type Mobil </h1>
+			<h1> Data Type Barang </h1>
 		</div>
 	</div>
 

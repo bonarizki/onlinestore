@@ -1,7 +1,7 @@
 <div class= "main-content">
 	<section class= "section">
 		<div class= "section-header">
-			<h1>Detail Motor</h1>
+			<h1>Detail Barang</h1>
 		</div>
 	</section>
 

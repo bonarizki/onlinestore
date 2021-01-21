@@ -1,7 +1,7 @@
 <div class= "main-content">
 	<section class= "section">
 		<div class= "section-header">
-			<h1>Data Motor</h1>
+			<h1>Data Barang</h1>
 		</div>
 
 		<a href="<?php echo base_url ('admin/data_barang/tambah_barang') ?>" class="btn btn-primary mb-4"> Tambah Data </a>
