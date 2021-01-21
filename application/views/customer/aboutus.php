@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <p class="mt-3">VERA Rental Mobil hadir di tengah-tengah masyarakat yang membutuhkan jasa transportasi yang aman dan nyaman.</p>
+            <!-- <p class="mt-3">VERA Rental Mobil hadir di tengah-tengah masyarakat yang membutuhkan jasa transportasi yang aman dan nyaman.</p>
 
             <p>VERA RENT CAR merupakan perusahaan jasa rental mobil yang berada di Area Jakarta Barat.</p>
 
@@ -16,7 +16,7 @@
 
             <p>Dengan pengalaman menguasai jalan-jalan di ibukota Jakarta maupun di luar kota, maka anda bisa menikmati perjalanan anda bersama kami, tanpa perlu dipusingkan dengan keruwetan jalan ibukota maupun di luar kota.</p>
 
-            <p>Apapun kebutuhan Anda akan jasa rental mobil di Jakarta, segera hubungi kami untuk mendapatkan info dan penawaran harga terbaik. Kepuasan anda adalah kebanggaan kami.</p>
+            <p>Apapun kebutuhan Anda akan jasa rental mobil di Jakarta, segera hubungi kami untuk mendapatkan info dan penawaran harga terbaik. Kepuasan anda adalah kebanggaan kami.</p> -->
         </div>
     </div>
 </div>
