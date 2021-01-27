@@ -112,11 +112,10 @@ class rental_model extends CI_model {
 		FROM transaksi
 			INNER JOIN customer 
 				ON transaksi.id_customer = customer.id_customer
-			INNER JOIN motor 	
-				ON transaksi.id_motor = motor.id_motor
+			INNER JOIN barang 	
+				ON transaksi.id_barang = barang.id_barang
 			INNER JOIN type
-				ON type.kode_type = motor.kode_type")->result();
-
+				ON type.kode_type = barang.kode_type")->result();
 		return $data;
 	}
 

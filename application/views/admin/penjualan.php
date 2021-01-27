@@ -11,8 +11,7 @@
                 <tr>
                     <th> Id Order </th>
                     <th> Nama Cust </th>
-                    <th> Jenis Mobil </th>
-                    <th> Plat </th>
+                    <th> Merk </th>
                     <th> Status </th>
                     <th> Type</th>
                     <th> Opsi </th>
@@ -22,8 +21,7 @@
                 <tr>
                     <th> Id Order </th>
                     <th> Nama Cust </th>
-                    <th> Jenis Mobil </th>
-                    <th> Plat </th>
+                    <th> Merk</th>
                     <th> Status </th>
                     <th> Type</th>
                     <th> Opsi </th>
@@ -45,16 +43,15 @@
                         return data+'-'+row.merk+'-'+row.warna;
                     }
                 },
-                {"data":"no_plat"},
                 {
-                    "data":"status",
+                    "data":"satatus_transaksi",
                     "render":(data,type,row)=>{
                         if (data==0) {
-                            return "tersedia";
-                        }else if(data==3){
-                            return "booked";
+                            return "menunggu pembayaran";
+                        }else if(data==1){
+                            return "menunggu konfirmasi";
                         }else{
-                            return "terjual"
+                            return "terfkonfirmasi"
                         }
                     }
                 },

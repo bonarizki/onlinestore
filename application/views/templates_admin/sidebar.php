@@ -31,8 +31,8 @@
               <li><a class="nav-link" href="<?php echo base_url ('admin/data_barang') ?>"><i class="fas fa-car"></i> <span>Data Barang</span></a></li>
               <li><a class="nav-link" href="<?php echo base_url ('admin/data_type') ?>"><i class="fas fa-grip-horizontal"></i> <span>Data Type</span></a></li>
               <li><a class="nav-link" href="<?php echo base_url ('admin/data_customer') ?>"><i class="fas fa-users"></i> <span>Data Customer</span></a></li>
-              <li><a class="nav-link" href=""><i class="fas fa-random"></i> <span>Data Penjualan</span></a></li>
-              <!-- <li><a class="nav-link" href="<?php echo base_url ('admin/laporan') ?>"><i class="fas fa-clipboard-list"></i> <span>Laporan</span></a></li> -->
+              <li><a class="nav-link" href="<?php echo base_url ('admin/dashboard/data_pesanan') ?>"><i class="fas fa-random"></i> <span>Data Penjualan</span></a></li>
+              <li><a class="nav-link" href="<?php echo base_url ('admin/laporan') ?>"><i class="fas fa-clipboard-list"></i> <span>Laporan</span></a></li>
               <li><a class="nav-link" href="<?php echo base_url ('auth/logout') ?>"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
               <!-- <li><a class="nav-link" href="<?php echo base_url ('auth/ganti_password') ?>"><i class="fas fa-lock"></i> <span>Ganti Password</span></a></li> -->
             </ul>
