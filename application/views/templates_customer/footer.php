@@ -12,7 +12,6 @@
             <img class="card-img-top" id="imgModal" src="" style ="width : 450px; height : 300px" alt="">
             <h4 id="idModal" hidden></h4>
             <h4 id="merekModal"></h4>
-            <h5 id="platModal"></h5>
             <h5 id="hargaModal">Harga&nbsp;&nbsp;&nbsp;&nbsp;: <?php echo number_format(1000,2,',','.') ?> </h5>
             <div>
               <tr>
@@ -67,7 +66,7 @@
           $('#imgModal').attr('src','<?= base_url('assets/upload/')?>'+ndata[0].gambar);
           $('#merekModal').text(ndata[0].merk);
           $('#idModal').text(ndata[0].id_barang);
-          $('#platModal').text("No. Plat : "+ndata[0].no_plat);
+          // $('#platModal').text("No. Plat : "+ndata[0].no_plat);
           $('#hargaModal').text("Harga    : "+ndata[0].harga);
         }
       })
