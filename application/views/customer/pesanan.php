@@ -34,7 +34,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Upload Pembayaran</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -43,7 +43,7 @@
 				<form enctype="multipart/form-data" id="form">
                     <input type="text" name="id_transaksi" id="id_transaksi" hidden>
                     <div class="form-group">
-                        <label for="exampleFormControlFile1">Example file input</label>
+                        <label for="exampleFormControlFile1">Bukti transfer</label>
                         <input type="file" class="form-control-file" id="file">
                     </div>
 				</form>
