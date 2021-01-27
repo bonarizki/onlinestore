@@ -89,6 +89,7 @@ class rental_model extends CI_model {
 
 	public function updateStatusMobil($data)
 	{
+		
 		$this->db->where('id_mobil',$data['id_mobil']);
 		return $this->db->update('mobil',["status"=>'1']);
 	}
@@ -134,14 +135,14 @@ class rental_model extends CI_model {
 
 	public function updateStatusMobil2($id)
 	{
-		$this->db->where('id_motor',$id);
-		return $this->db->update('motor',["status"=>'0']);
+		$this->db->where('id_barang',$id);
+		return $this->db->update('barang',["status"=>'0']);
 	}
 
 	public function updateStatusMobil3($data)
 	{
-		$this->db->where('id_motor',$data['id_motor']);
-		return $this->db->update('motor',["status"=>'3']);
+		$this->db->where('id_barang',$data['id_barang']);
+		return $this->db->update('barang',["status"=>'3']);
 	}
 
 	public function cancelSewa($id)
@@ -155,6 +156,21 @@ class rental_model extends CI_model {
 		$query = "SELECT * FROM data_sewa_mobil as dsm INNER JOIN mobil as car on dsm.id_mobil=car.id_mobil where
 		dsm.id_sewa='".$id."'";
 		return $this->db->query($query)->result_array();
+	}
+
+	public function getPesanan($id)
+	{
+		$this->db->select('*');
+		$this->db->from('barang');
+		$this->db->join('transaksi', 'barang.id_barang=transaksi.id_barang', 'inner');
+		$this->db->where('transaksi.id_customer',$id);
+		return $this->db->get()->result_array();
+	}
+
+	public function updateTransaksi($data)
+	{
+		$this->db->where('id_trans',$data['id_trans']);
+		return $this->db->update('transaksi',$data);
 	}
 }
 

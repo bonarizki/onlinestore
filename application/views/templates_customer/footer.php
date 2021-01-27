@@ -3,7 +3,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Detail Motor</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Detail Barang</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -21,7 +21,7 @@
                 <td>
                   <select id="type_transaksi" name="type_transaksi">
                     <option value="">Select</option>
-                    <option value="COD">COD</option>
+                    <!-- <option value="COD">COD</option> -->
                     <option value="TRANSFER">TRANSFER</option>
                   </select>
                 </td>
@@ -66,7 +66,7 @@
           ndata = JSON.parse(data);
           $('#imgModal').attr('src','<?= base_url('assets/upload/')?>'+ndata[0].gambar);
           $('#merekModal').text(ndata[0].merk);
-          $('#idModal').text(ndata[0].id_motor);
+          $('#idModal').text(ndata[0].id_barang);
           $('#platModal').text("No. Plat : "+ndata[0].no_plat);
           $('#hargaModal').text("Harga    : "+ndata[0].harga);
         }
@@ -129,7 +129,7 @@
           $.ajax({
             type:'post',
             data:{
-              "id_motor" : $('#idModal').text(),
+              "id_barang" : $('#idModal').text(),
               "type_transaksi" : $('#type_transaksi').val()
             },
             url:"<?= base_url('customer/dashboard/sewaMotor') ?>",

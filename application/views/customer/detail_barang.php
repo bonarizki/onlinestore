@@ -32,10 +32,10 @@
 				               if ($dt->status == "0") {
 				                echo "<span class='btn btn-danger' disable> TERJUAL </span>";
 							   }else if ($dt->status == '3'){
-								echo "<span class='btn btn-danger' disable> BOOKED </span>";
+								echo "<span class='btn btn-danger' disable> Menunggu Pembayaran </span>";
 							 	}else{
 				                // echo '<button class="btn btn-success"  onclick="sewamobil('.$dt->id_barang.')"> Beli </button>';
-				                echo '<button class="btn btn-success"> Beli </button>';
+				                echo '<button class="btn btn-success" onclick="sewamobil('.$dt->id_barang.')"> Beli </button>';
 				               }
 				               ?>
 							</td>
