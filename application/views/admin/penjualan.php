@@ -6,34 +6,71 @@
 
         <?php echo $this->session->flashdata ('pesan') ?>
             
-        <table class="table table-striped table-bordered table-sm" id="table">
-            <thead>
-                <tr>
-                    <th> Id Order </th>
-                    <th> Nama Cust </th>
-                    <th> Merk </th>
-                    <th> Status </th>
-                    <th> Type</th>
-                    <th> Opsi </th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th> Id Order </th>
-                    <th> Nama Cust </th>
-                    <th> Merk</th>
-                    <th> Status </th>
-                    <th> Type</th>
-                    <th> Opsi </th>
-                </tr>
-            </tfoot>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-sm" id="table" width="100%">
+                <thead>
+                    <tr>
+                        <th> Id Order </th>
+                        <th> Nama Cust </th>
+                        <th> Merk </th>
+                        <th> Total Item </th>
+                        <th> Status </th>
+                        <th> Type</th>
+                        <th> Opsi </th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th> Id Order </th>
+                        <th> Nama Cust </th>
+                        <th> Merk</th>
+                        <th> Total Item</th>
+                        <th> Status </th>
+                        <th> Type</th>
+                        <th> Opsi </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </section>
-</div>  
+</div>
+
+<div class="modal fade" id="konfirmasi-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Pembayaran</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img class="card-img-top" id="imgModal" src="" style ="width : 450px; height : 300px" alt="">
+            <h4 id="idModal" hidden></h4>
+            <h4 id="merekModal"></h4>
+            <h5>Harga:</h5>
+            <h5 id="hargaModal"><?php echo number_format(1000,2,',','.') ?> </h5>
+            <div class="mt-2">
+              <label for="">Jumlah Barang</label>
+              <input type="number" class="form-control" id="total_item" placeholder="Total Item" readonly>
+            </div>
+            <div class="mt-2" id="total">
+              <label for="">Total Bayar</label>
+              <input type="text" class="form-control" id="total_bayar" placeholder="Total Bayar" readonly>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="button">Konfirmasi</button>
+          </div>
+        </div>
+      </div>
+  </div>
 
 <script>
     $(document).ready( function () {
         $('#table').DataTable({
+            responsive:true,
             ajax:"<?= base_url('admin/dashboard/getAllOrder') ?>",
             columns:[
                 {"data":"id_trans"},
@@ -43,6 +80,7 @@
                         return data+'-'+row.merk+'-'+row.warna;
                     }
                 },
+                {"data":"total_item"},
                 {
                     "data":"satatus_transaksi",
                     "render":(data,type,row)=>{
@@ -56,25 +94,18 @@
                     }
                 },
                 {"data":"type_transaksi"},
-                {"data":"id_trans"}
+                {
+                    "data":"id_trans",
+                    "render":(data,type,row)=>{
+                        return `
+                                <button class="btn btn-sm btn-success" onclick="showModal('${data}')">
+                                    Konfirmasi
+                                </button>
+                                `
+                    }
+                }
                 
             ],
-            "createdRow": function( row, data, dataIndex ) {
-                            var today = getDateToday();
-							if (data.flag_sewa=='1') {
-                                if(data.flag_sewa=='1'&&today>data.tanggal_kembali){
-                                    return $(row).addClass('table-danger');
-                                }else{
-                                    return $(row).addClass('table-info');
-                                }
-							}else if(data.flag_sewa=='2'){
-								$(row).addClass('table-success');
-                            }else if(data.flag==null){
-                                if(data.flag_sewa==null&&today==data.tanggal_sewa){
-                                    return $(row).addClass('table-warning');
-                                }
-                            }
-		    },
             dom: 'Bfrtip',
             buttons: [
                 'pageLength',
@@ -85,72 +116,8 @@
         });
     });
 
-    var today = getDateToday();
+    
 
-    function ButtonDecision(flag_sewa,tanggal_sewa,id_sewa,tanggal_kembali,id_mobil)
-    {   
-        var today = getDateToday();
-        if(flag_sewa==null){
-            return buttonNull(flag_sewa,tanggal_sewa,id_sewa,id_mobil);
-        }else if(flag_sewa=='1'){
-            return buttonOne(flag_sewa,tanggal_kembali,id_sewa,id_mobil)
-        }else if(flag_sewa=='2'){
-            return 'No Action'
-        }
-    }
-
-    function getDateToday()
-    {
-        var date = new Date();
-        var month = date.getMonth()+1;
-        var month2 = month < 10 ? '0' + month : '' + month;
-        var day = date.getDate();
-        var year = date.getFullYear();
-        return year+'-'+month2+'-'+day
-    }
-
-    function buttonNull(flag_sewa,tanggal_sewa,id_sewa,id_mobil)
-    {
-        if(flag_sewa==null&&tanggal_sewa==today){
-            return '<center><badge class="btn btn-sm btn-success fa fa-check-circle mr-2" onclick="custTakeCar('+"'"+id_sewa+"'"+')" title="Customer Have Take a Car"></badge><badge class="btn btn-sm btn-danger fa fa-times-circle" onclick=cancelOrder('+"'"+id_sewa+"','"+id_mobil+"'"+') title="Cancel Sewa"></badge></center>'
-        }else{
-            return '<center><badge class="btn btn-sm btn-danger fa fa-times-circle" onclick=cacncelOrder('+"'"+id_sewa+"','"+id_mobil+"'"+') title="Cancel Order"></badge><center>'
-        }
-    }
-
-    function buttonOne(flag_sewa,tanggal_kembali,id_sewa,id_mobil)
-    {
-        if(flag_sewa=='1'&&today>tanggal_kembali){
-            return '<center><badge class="btn btn-sm btn-danger fa fa-check-double mr-2" title="the car is back" onclick="carBackWithCharge('+"'"+id_sewa+"','"+id_mobil+"'"+')"></badge></center>'
-        }else{
-            return '<center><badge class="btn btn-sm btn-success fa fa-check-double mr-2" onclick="carBack('+"'"+id_sewa+"','"+id_mobil+"'"+')" title="the car is back"></badge></center>'
-        }
-    }
-
-    function custTakeCar(id)
-    {
-        Swal.fire({
-            title: 'Apakah Kamu Yakin?',
-            text: "Customer Sudah Membayar dan Mengambil Mobil?",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, Saya Yakin',
-            preConfirm:function(isConfirm){
-                $.ajax({
-                    url:"<?= base_url('admin/dashboard/CarInRent/')?>"+id,
-                    success:function(response){
-                        sweetSuccess(response.message);
-                        tableReset();
-                    },
-                    error:function(response){
-                        sweetFailed(response.statusText);
-                    }
-                })
-            }
-        })
-    }
 
     function sweetSuccess(message)
     {
@@ -176,31 +143,7 @@
         table.ajax.reload();
     }
 
-    function carBack(id,id_mobil)
-    {
-        // console.log(id_mobil)
-        Swal.fire({
-            title: 'Apakah Kamu Yakin?',
-            text: "Customer Sudah Mengembalikan Mobil?",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, Saya Yakin',
-            preConfirm:function(isConfirm){
-                $.ajax({
-                    url:"<?= base_url('admin/dashboard/carIsBack/')?>"+id+"/"+id_mobil,
-                    success:function(response){
-                        sweetSuccess(response.message);
-                        tableReset();
-                    },
-                    error:function(response){
-                        sweetFailed(response.statusText);
-                    }
-                })
-            }
-        })
-    }
+    
 
     function cacncelOrder(id_sewa,id_mobil)
     {
@@ -227,63 +170,27 @@
         })
     }
 
-    function carBackWithCharge(id,id_mobil)
-    {
-        Swal.fire({
-            title: 'Apakah Kamu Yakin?',
-            text: "Customer Sudah Mengembalikan Mobil?",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, Saya Yakin',
-            preConfirm:function(isConfirm){
-                $.ajax({
-                    url:"<?= base_url('admin/dashboard/carBackWithCharge/')?>"+id,
-                    success:function(response){
-                        var data = JSON.parse(response).data[0]
-                        var today = getDateToday()
-                        var tanggal_kembali = data.tanggal_kembali;
-                        var tgl1 = new Date(today);
-                        var tgl2 = new Date(tanggal_kembali);
-                        var timeDiff = (tgl2 - tgl1) / 1000;
-                        var hari = Math.floor(timeDiff/(86400));
-                        var finalhari = Math.abs(hari)
-                        var denda = finalhari*data.harga;
-                        alertCharge(denda,id,id_mobil)
-                        // sweetSuccess(response.message);
-                        // tableReset();
-                    },
-                    error:function(response){
-                        sweetFailed(response.statusText);
-                    }
-                })
+    showModal = (id) => {
+        $.ajax({
+            type:"get",
+            url:"<?= base_url('admin/dashboard/getOrderById') ?>/"+id,
+            success:(res)=>{
+                let data = JSON.parse(res);
+                data = data.data[0]
+                if (data.image_trasfer=='') {
+                    sweetFailed('belum melakukan transfer')
+                }else{
+                    $('#imgModal').attr('src','<?= base_url('assets/upload/')?>'+data.image_trasfer);
+                    $('#merekModal').text(data.merk);
+                    $('#idModal').text(data.id_barang);
+                    $('#hargaModal').text(data.harga);
+                    $('#total_item').val(data.total_item);
+                    $('#total_bayar').val(data.harga*data.total_item)
+                    $('#konfirmasi-modal').modal('show');
+                }
             }
         })
     }
 
-    function alertCharge(denda,id_sewa,id_mobil)
-    {
-        Swal.fire({
-            title: 'Denda',
-            text: "Silahkan Tagih Denda Sebesar "+denda,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes',
-            preConfirm:function(isConfirm){
-                $.ajax({
-                    url:"<?= base_url('admin/dashboard/carIsBack/')?>"+id_sewa+"/"+id_mobil,
-                    success:function(response){
-                        sweetSuccess(response.message);
-                        tableReset();
-                    },
-                    error:function(response){
-                        sweetFailed(response.statusText);
-                    }
-                })
-            }
-        })
-    }
+    
 </script>

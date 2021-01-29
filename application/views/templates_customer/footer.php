@@ -12,21 +12,24 @@
             <img class="card-img-top" id="imgModal" src="" style ="width : 450px; height : 300px" alt="">
             <h4 id="idModal" hidden></h4>
             <h4 id="merekModal"></h4>
-            <h5 id="hargaModal">Harga&nbsp;&nbsp;&nbsp;&nbsp;: <?php echo number_format(1000,2,',','.') ?> </h5>
+            <h5>Harga:</h5>
+            <h5 id="hargaModal"><?php echo number_format(1000,2,',','.') ?> </h5>
             <div>
-              <tr>
-                <td>Metode Pembelian </td>
-                <td> : </td>
-                <td>
-                  <select id="type_transaksi" name="type_transaksi">
-                    <option value="">Select</option>
-                    <!-- <option value="COD">COD</option> -->
-                    <option value="TRANSFER">TRANSFER</option>
-                  </select>
-                </td>
-              </tr>
+              <label>Metode Pembelian </label>
+              <select id="type_transaksi" name="type_transaksi" class="form-control">
+                <option value="">Select</option>
+                <!-- <option value="COD">COD</option> -->
+                <option value="TRANSFER">TRANSFER</option>
+              </select>
             </div>
-            
+            <div class="mt-2">
+              <label for="">Jumlah Barang</label>
+              <input type="number" class="form-control" id="total_item" placeholder="Total Item" value="1" onkeyup="hitung(this)">
+            </div>
+            <div class="mt-2" id="total" hidden>
+              <label for="">Total Bayar</label>
+              <input type="text" class="form-control" id="total_bayar" placeholder="Total Bayar" readonly>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -67,7 +70,7 @@
           $('#merekModal').text(ndata[0].merk);
           $('#idModal').text(ndata[0].id_barang);
           // $('#platModal').text("No. Plat : "+ndata[0].no_plat);
-          $('#hargaModal').text("Harga    : "+ndata[0].harga);
+          $('#hargaModal').text(ndata[0].harga);
         }
       })
       $('#SewaModal').modal('show')
@@ -129,7 +132,8 @@
             type:'post',
             data:{
               "id_barang" : $('#idModal').text(),
-              "type_transaksi" : $('#type_transaksi').val()
+              "type_transaksi" : $('#type_transaksi').val(),
+              "total_item" : $('#total_item').val(),
             },
             url:"<?= base_url('customer/dashboard/sewaMotor') ?>",
             success:function(data){
@@ -146,6 +150,14 @@
           })
         }
       }
+    }
+
+    hitung = (data) => {
+      let item = data.value;
+      let modal = $('#hargaModal').text();
+      let total_harga = parseInt(modal)*item;
+      $('#total_bayar').val(total_harga);
+      $('#total').attr('hidden',false)
     }
 </script>
 

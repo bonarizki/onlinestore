@@ -119,6 +119,20 @@ class rental_model extends CI_model {
 		return $data;
 	}
 
+	public function getOrderById($id)
+	{
+		$data = $this->db->query("SELECT * 
+		FROM transaksi
+			INNER JOIN customer 
+				ON transaksi.id_customer = customer.id_customer
+			INNER JOIN barang 	
+				ON transaksi.id_barang = barang.id_barang
+			INNER JOIN type
+				ON type.kode_type = barang.kode_type
+			WHERE transaksi.id_trans = '".$id."'")->result();
+		return $data;
+	}
+
 	public function updateCarInRent($id)
 	{
 		$this->db->where('id_sewa',$id);

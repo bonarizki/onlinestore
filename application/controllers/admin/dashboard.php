@@ -114,6 +114,12 @@ class Dashboard extends Secure_Controller {
 		echo json_encode(["data"=>$data]);
 	}
 
+	public function getOrderById($id)
+	{
+		$data = $this->rental_model->getOrderById($id);
+		echo json_encode(["data"=>$data]);
+	}
+
 	public function CarInRent($id)
 	{
 		$data = $this->rental_model->updateCarInRent($id);

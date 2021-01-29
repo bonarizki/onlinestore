@@ -37,6 +37,7 @@ class Dashboard extends Secure_Controller {
 			"id_customer"=>$this->session->userdata('id_customer'),
 			"id_barang"=>$this->input->post(['id_barang'][0]),
 			"satatus_transaksi"=>'0',
+			"total_item" => $this->input->post(['total_item'][0]),
 			"type_transaksi"=>$this->input->post(['type_transaksi'][0]),
 			"date"=>$tanggal
 		];
@@ -88,7 +89,7 @@ class Dashboard extends Secure_Controller {
 		$data = array(
 			"id_trans" => $this->input->post('id_transaksi'),
 			"image_trasfer" => $gambar,
-			"satatus_transaksi" => '1'
+			"satatus_transaksi" => '1',
 		);
 		
 		$this->rental_model->updateTransaksi($data);
