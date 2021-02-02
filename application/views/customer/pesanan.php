@@ -19,7 +19,7 @@
                             echo "Pembayaran Terkonfirmasi";
                         } ?>
                     </p>
-                    <?php if ($pesanan[$i]['satatus_transaksi'] != '2s') { ?>
+                    <?php if ($pesanan[$i]['satatus_transaksi'] != '2') { ?>
                         <a class="card-link upload" onclick="modal('<?= $pesanan[$i]['id_trans'] ?>')">Upload Pembayaran</a>
                     <?php } ?>
                     
