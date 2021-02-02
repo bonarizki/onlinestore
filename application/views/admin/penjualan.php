@@ -104,11 +104,16 @@
                 {
                     "data":"id_trans",
                     "render":(data,type,row)=>{
-                        return `
+                        if(row.satatus_transaksi != '2'){
+                            return `
                                 <button class="btn btn-sm btn-success" onclick="showModal('${data}')">
                                     Konfirmasi
                                 </button>
                                 `
+                        }else{
+                            return 'terfkonfirmasi';
+                        }
+                        
                     }
                 }
                 
