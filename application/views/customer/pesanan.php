@@ -15,9 +15,14 @@
                             echo "Menunggu Pembayaran";
                         }else if($pesanan[$i]['satatus_transaksi'] == '1'){
                             echo "Menunggu Konfirmasi";
+                        }else if($pesanan[$i]['satatus_transaksi'] == '2'){
+                            echo "Pembayaran Terkonfirmasi";
                         } ?>
                     </p>
-                    <a class="card-link upload" onclick="modal('<?= $pesanan[$i]['id_trans'] ?>')">Upload Pembayaran</a>
+                    <?php if ($pesanan[$i]['satatus_transaksi'] != '2s') { ?>
+                        <a class="card-link upload" onclick="modal('<?= $pesanan[$i]['id_trans'] ?>')">Upload Pembayaran</a>
+                    <?php } ?>
+                    
                 </div>
             </div>
         </div>
