@@ -145,6 +145,12 @@ class Dashboard extends Secure_Controller {
 		$data = $this->rental_model->getDataForCalculate($id);
 		echo json_encode(["info"=>"success","data"=>$data]);
 	}
+
+	public function kofirmasi($id)
+	{
+		$this->rental_model->konfirmasiPembayaran($id);
+		echo json_encode(["info"=>"success","message"=>"Pembayaran Berhasil Di Konfirmasi"]);
+	}
 	
 }
 

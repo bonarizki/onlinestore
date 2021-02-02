@@ -67,7 +67,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="button">Konfirmasi</button>
+            <button type="button" class="btn btn-primary" id="button-konfirmasi" >Konfirmasi</button>
           </div>
         </div>
       </div>
@@ -204,10 +204,24 @@
                     $('#type_pengiriman').val(data.type_pengiriman);
                     $('#total_bayar').val(data.harga*data.total_item+ongkir)
                     $('#konfirmasi-modal').modal('show');
+                    $('#button-konfirmasi').attr('onclick',`konfirmasi('${id}')`)
                 }
             }
         })
     }
+
+    konfirmasi = (id) => {
+        $.ajax({
+            type:"get",
+            url:"<?= base_url('admin/dashboard/kofirmasi') ?>/"+id,
+            success: (res) => {
+                sweetSuccess('Pembayaran Berhasil Terkonfirmasi');
+                tableReset();
+                $('#konfirmasi-modal').modal('hide');
+            }
+        })
+    }
+    
 
     
 </script>

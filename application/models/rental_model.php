@@ -185,6 +185,12 @@ class rental_model extends CI_model {
 		$this->db->where('id_trans',$data['id_trans']);
 		return $this->db->update('transaksi',$data);
 	}
+
+	public function konfirmasiPembayaran($id)
+	{
+		$this->db->where('id_trans',$id);
+		return $this->db->update('transaksi',["satatus_transaksi"=>"2"]);
+	}
 }
 
 ?>
