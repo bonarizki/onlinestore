@@ -16,6 +16,14 @@ class Dashboard extends Secure_Controller {
 		$this->load->view('templates_customer/footer');
 	}
 
+	public function product () 
+	{
+		$data ['barang'] = $this->rental_model->get_data('barang') ->result();
+		$this->load->view('templates_customer/header');
+		$this->load->view('customer/dashboard', $data);
+		$this->load->view('templates_customer/footer');
+	}
+
 	public function detail_barang ($id)
 	{
 		$data ['detail'] = $this->rental_model->ambil_id_barang($id);
@@ -39,6 +47,7 @@ class Dashboard extends Secure_Controller {
 			"satatus_transaksi"=>'0',
 			"total_item" => $this->input->post(['total_item'][0]),
 			"type_transaksi"=>$this->input->post(['type_transaksi'][0]),
+			"type_pengiriman"=>$this->input->post(['type_pengiriman'][0]),
 			"date"=>$tanggal
 		];
 		$this->rental_model->beli_motor($data);

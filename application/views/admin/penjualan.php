@@ -16,6 +16,7 @@
                         <th> Total Item </th>
                         <th> Status </th>
                         <th> Type</th>
+                        <th> Pengiriman</th>
                         <th> Opsi </th>
                     </tr>
                 </thead>
@@ -27,6 +28,7 @@
                         <th> Total Item</th>
                         <th> Status </th>
                         <th> Type</th>
+                        <th> Pengiriman</th>
                         <th> Opsi </th>
                     </tr>
                 </tfoot>
@@ -53,6 +55,10 @@
             <div class="mt-2">
               <label for="">Jumlah Barang</label>
               <input type="number" class="form-control" id="total_item" placeholder="Total Item" readonly>
+            </div>
+            <div class="mt-2">
+              <label for="">Type Pengiriman</label>
+              <input type="text" class="form-control" id="type_pengiriman" readonly>
             </div>
             <div class="mt-2" id="total">
               <label for="">Total Bayar</label>
@@ -94,6 +100,7 @@
                     }
                 },
                 {"data":"type_transaksi"},
+                {"data":"type_pengiriman"},
                 {
                     "data":"id_trans",
                     "render":(data,type,row)=>{
@@ -180,12 +187,22 @@
                 if (data.image_trasfer=='') {
                     sweetFailed('belum melakukan transfer')
                 }else{
+                    console.log(data.type_pengiriman)
+                    let onkir = 0;
+                    if(data.type_pengiriman=='TIKI'){
+                        ongkir = 18000
+                    }else if(data.type_pengiriman=='JNE'){
+                        ongkir = 20000
+                    }else{
+                        onkir = 22000
+                    }
                     $('#imgModal').attr('src','<?= base_url('assets/upload/')?>'+data.image_trasfer);
                     $('#merekModal').text(data.merk);
                     $('#idModal').text(data.id_barang);
                     $('#hargaModal').text(data.harga);
                     $('#total_item').val(data.total_item);
-                    $('#total_bayar').val(data.harga*data.total_item)
+                    $('#type_pengiriman').val(data.type_pengiriman);
+                    $('#total_bayar').val(data.harga*data.total_item+ongkir)
                     $('#konfirmasi-modal').modal('show');
                 }
             }

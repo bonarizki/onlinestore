@@ -52,16 +52,13 @@
 
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="<?php echo base_url ('assets/upload/'.$brg->gambar) ?>" style ="width : 160px; height : 130px" alt=""></a>
+              <a href="<?php echo base_url ('customer/dashboard/detail_barang/'). $brg->id_barang?>"><img class="card-img-top" src="<?php echo base_url ('assets/upload/'.$brg->gambar) ?>" style ="width : 160px; height : 130px" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="#"><?php echo $brg->merk ?> </a>
                 </h4>
                 <h5>Harga&nbsp;&nbsp;&nbsp;&nbsp;: <?php echo number_format($brg->harga,2,',','.') ?> </h5>
                 <h5>Diskon&nbsp;&nbsp;&nbsp: <?php echo number_format($brg->diskon,2,',','.') ?> </h5>
-              </div>
-              <div class="card-footer">
-               <a class="btn btn-warning" href="<?php echo base_url ('customer/dashboard/detail_barang/'). $brg->id_barang?>"> Detail </a>
               </div>
             </div>
           </div>

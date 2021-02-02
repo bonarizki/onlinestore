@@ -26,7 +26,6 @@
 </head>
 
 <body>
-
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
@@ -37,21 +36,21 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active">
+					<li class="nav-item <?php if($this->uri->uri_string() == "customer/dashboard"){echo "active";}?>">
 						<a class="nav-link" href="<?= base_url('customer/dashboard') ?>">Home
 							<span class="sr-only">(current)</span>
 						</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="<?= base_url('customer/dashboard/') ?>">Product</a>
+					<li class="nav-item <?php if($this->uri->uri_string() == "customer/dashboard/product"){echo "active";}?>">
+						<a class="nav-link" href="<?= base_url('customer/dashboard/product') ?>">Product</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item <?php if($this->uri->uri_string() == "customer/dashboard/pesanan"){echo "active";}?> ">
 						<a class="nav-link" href="<?= base_url('customer/dashboard/pesanan') ?>">Pesanan</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item <?php if($this->uri->uri_string() == "customer/dashboard/aboutUS"){echo "active";}?>">
 						<a class="nav-link" href="<?= base_url('customer/dashboard/aboutUS') ?>">About Us</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item <?php if($this->uri->uri_string() == "customer/dashboard/"){echo "active";}?>">
 						<a class="nav-link" href="#">Contact Us</a>
 					</li>
 					<li class="nav-item row ml-3">

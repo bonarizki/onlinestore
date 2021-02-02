@@ -18,8 +18,16 @@
               <label>Metode Pembelian </label>
               <select id="type_transaksi" name="type_transaksi" class="form-control">
                 <option value="">Select</option>
-                <!-- <option value="COD">COD</option> -->
                 <option value="TRANSFER">TRANSFER</option>
+              </select>
+            </div>
+            <div>
+              <label>Pengiriman </label>
+              <select id="type_pengiriman" name="type_pengiriman" class="form-control">
+                <option value="">Select</option>
+                <option value="TIKI">Tiki</option>
+                <option value="JNE">JNE</option>
+                <option value="J&T">J&T</option>
               </select>
             </div>
             <div class="mt-2">
@@ -120,11 +128,11 @@
           footer: '<a href>Why do I have this issue?</a>'
         });
       }else{
-        if($('#type_transaksi').val()==""){
+        if($('#type_transaksi').val()=="" || $('#type_pengiriman').val()==""){
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Anda Harus Memilih Metode Pembelian',
+            text:'Form Tidak Boleh Kosong',
             footer: '<a href>Why do I have this issue?</a>'
           });
         }else{
@@ -134,6 +142,7 @@
               "id_barang" : $('#idModal').text(),
               "type_transaksi" : $('#type_transaksi').val(),
               "total_item" : $('#total_item').val(),
+              "type_pengiriman" : $('#type_pengiriman').val()
             },
             url:"<?= base_url('customer/dashboard/sewaMotor') ?>",
             success:function(data){
@@ -155,7 +164,15 @@
     hitung = (data) => {
       let item = data.value;
       let modal = $('#hargaModal').text();
-      let total_harga = parseInt(modal)*item;
+      let onkir = 0;
+      if($('#type_pengiriman').val()=='TIKI'){
+        ongkir = 18000
+      }else if($('#type_pengiriman').val()=='JNE'){
+        ongkir = 20000
+      }else{
+        onkir = 22000
+      }
+      let total_harga = parseInt(modal)*item+ongkir;
       $('#total_bayar').val(total_harga);
       $('#total').attr('hidden',false)
     }
