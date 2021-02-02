@@ -52,7 +52,9 @@
 
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="<?php echo base_url ('customer/dashboard/detail_barang/'). $brg->id_barang?>"><img class="card-img-top" src="<?php echo base_url ('assets/upload/'.$brg->gambar) ?>" style ="width : 160px; height : 130px" alt=""></a>
+              <a href="<?php echo base_url ('customer/dashboard/detail_barang/'). $brg->id_barang?>">
+                <img class="card-img-top" src="<?php echo base_url ('assets/upload/'.$brg->gambar) ?>" style ="height : 130px" alt="">
+              </a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="#"><?php echo $brg->merk ?> </a>
