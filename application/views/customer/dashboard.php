@@ -57,7 +57,7 @@
               </a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#"><?php echo $brg->merk ?> </a>
+                  <a href="<?php echo base_url ('customer/dashboard/detail_barang/'). $brg->id_barang?>"><?php echo $brg->merk ?> </a>
                 </h4>
                 <h5>Harga&nbsp;&nbsp;&nbsp;&nbsp;: <?php echo number_format($brg->harga,2,',','.') ?> </h5>
                 <h5>Diskon&nbsp;&nbsp;&nbsp: <?php echo number_format($brg->diskon,2,',','.') ?> </h5>
